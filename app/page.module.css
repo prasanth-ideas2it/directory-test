@@ -1,0 +1,44 @@
+.home {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.home__cn {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .home {
+    padding: 40px 20px;
+  }
+
+  .home__cn {
+    width: 940px;
+  }
+
+  .home__cn {
+    gap: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .home__cn {
+    width: 1200px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .home__cn {
+    width: 1200px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .home__cn {
+    width: 1678px;
+  }
+}
