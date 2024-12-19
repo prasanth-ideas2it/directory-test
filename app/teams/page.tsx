@@ -57,21 +57,29 @@ const getPageData = async (searchParams: ITeamsSearchParams) => {
     const optionsFromQuery = getTeamsOptionsFromQuery(searchParams);
     const listOptions: ITeamListOptions = getTeamsListOptions(optionsFromQuery);
 
-    const [teamListResponse, teamListFiltersResponse, teamListFiltersForOptionsResponse, focusAreaResponse] = await Promise.all([
+    // const [teamListResponse, teamListFiltersResponse, teamListFiltersForOptionsResponse, focusAreaResponse] = await Promise.all([
+    //   getTeamList(listOptions),
+    //   getTeamListFilters({}),
+    //   getTeamListFilters(listOptions),
+    //   getFocusAreas("Team",searchParams),
+    // ]);
+
+    const [teamListResponse, teamListFiltersResponse, teamListFiltersForOptionsResponse] = await Promise.all([
       getTeamList(listOptions),
       getTeamListFilters({}),
       getTeamListFilters(listOptions),
-      getFocusAreas("Team",searchParams),
     ]);
 
-    if (teamListResponse?.isError || teamListFiltersResponse?.isError || teamListFiltersForOptionsResponse?.isError || focusAreaResponse?.error) {
+    // if (teamListResponse?.isError || teamListFiltersResponse?.isError || teamListFiltersForOptionsResponse?.isError || focusAreaResponse?.error) {
+      if (teamListResponse?.isError || teamListFiltersResponse?.isError || teamListFiltersForOptionsResponse?.isError ) {
       isError = true;
       return { isError };
     } 
 
     teams = teamListResponse.data;
     totalTeams = teamListResponse?.totalItems;
-    filtersValues = processFilters(searchParams, teamListFiltersResponse?.data, teamListFiltersForOptionsResponse?.data, focusAreaResponse?.data);
+    // filtersValues = processFilters(searchParams, teamListFiltersResponse?.data, teamListFiltersForOptionsResponse?.data, focusAreaResponse?.data);
+    filtersValues = processFilters(searchParams, teamListFiltersResponse?.data, teamListFiltersForOptionsResponse?.data, []);
     return JSON.parse(JSON.stringify({ isError, filtersValues, totalTeams, teams }));
   } catch (error: unknown) {
     isError = true;
