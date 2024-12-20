@@ -5,7 +5,7 @@ interface IUsePagination {
   observerTarget: React.RefObject<HTMLElement>;
 }
 
-const ITEMS_PER_PAGE = 30;
+const ITEMS_PER_PAGE = 100;
 
 const usePagination = ({ items, observerTarget }: IUsePagination) => {
   const [visibleItems, setVisibleItems] = useState<ReactElement[]>(() => items?.slice(0, ITEMS_PER_PAGE));
